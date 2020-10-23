@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    config:
+      override-none: true
+  rabbitmq:
+    host: 10.211.55.6
+    port: 5672
+    username: admin
+    password: admin            
+    
+server:
+  port: 8201
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
+
+#啟用hystrix
+feign:
+  hystrix:
+    enabled: true
+
+#暴露hystrix的監控端點數據
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: zuul
+  cloud:
+    config:
+      override-none: true    
+  rabbitmq:
+    host: 10.211.55.6
+    port: 5672
+    username: admin
+    password: admin  
+          
+server:
+  port: 3001
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
+
+#以下的配置是默認配置，可以省略
+#默認的配置是以服務id作為訪問路徑
+#zuul:
+#  routes:
+#    item-service: /item-service/**
+#    user-service: /user-service/**
+#    order-service: /order-service/**
+
+#重試默認不開啟，需要配置
+zuul:
+  retryable: true
+
+#ribbon的參數有默認值，不配也可以  
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+  MaxAutoRetriesNextServer: 1
+  MaxAutoRetries: 1
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream  
